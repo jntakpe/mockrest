@@ -31,6 +31,8 @@
         <commons-lang3.version>3.4</commons-lang3.version>
         <postgres.version>9.4-1201-jdbc41</postgres.version>
         <h2.version>1.4.187</h2.version>
+        <liquibase.version>3.4.0</liquibase.version>
+        <liquibase-hibernate4.version>3.5</liquibase-hibernate4.version>
         <javassist.version>3.18.2-GA</javassist.version>
         <testng.version>6.9.4</testng.version>
         <assertj.version>3.1.0</assertj.version>
@@ -112,6 +114,11 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>${h2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <version>${liquibase.version}</version>
         </dependency>
         <dependency>
             <groupId>com.zaxxer</groupId>
@@ -237,6 +244,48 @@
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>${liquibase.version}</version>
+                <configuration>
+                    <changeLogFile>src/main/resources/liquibase/master.xml</changeLogFile>
+                    <diffChangeLogFile>src/main/resources/liquibase/changelog/yyyyMMddHHmmss_changelog.xml
+                    </diffChangeLogFile>
+                    <driver>org.h2.Driver</driver>
+                    <url>jdbc:h2:file:/data/h2/mockrest;DB_CLOSE_DELAY=-1</url>
+                    <referenceUrl>
+                        hibernate:spring:com.github.jntakpe.mockrest.domain?dialect=org.hibernate.dialect.H2Dialect
+                    </referenceUrl>
+                    <verbose>true</verbose>
+                    <logging>debug</logging>
+                    <diffExcludeObjects>
+                        oauth_access_token,
+                        oauth_approvals,
+                        oauth_client_details,
+                        oauth_client_token,
+                        oauth_code,
+                        oauth_refresh_token
+                    </diffExcludeObjects>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.javassist</groupId>
+                        <artifactId>javassist</artifactId>
+                        <version>${javassist.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.liquibase.ext</groupId>
+                        <artifactId>liquibase-hibernate4</artifactId>
+                        <version>${liquibase-hibernate4.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-data-jpa</artifactId>
+                        <version>${spring-boot.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
