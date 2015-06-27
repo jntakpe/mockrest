@@ -20,6 +20,8 @@ public class AppInfosProperties {
 
     private String contact;
 
+    private String termsOfService;
+
     private String license;
 
     private String licenseUrl;
@@ -54,6 +56,14 @@ public class AppInfosProperties {
 
     public void setContact(String contact) {
         this.contact = contact;
+    }
+
+    public String getTermsOfService() {
+        return termsOfService;
+    }
+
+    public void setTermsOfService(String termsOfService) {
+        this.termsOfService = termsOfService;
     }
 
     public String getLicense() {
