@@ -121,6 +121,25 @@
             <version>${liquibase.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.mangofactory</groupId>
+            <artifactId>swagger-springmvc</artifactId>
+            <version>${swagger-springmvc.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jackson-module-scala_2.10</artifactId>
+                    <groupId>com.fasterxml.jackson.module</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>scalap</artifactId>
+                    <groupId>org.scala-lang</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>scala-compiler</artifactId>
+                    <groupId>org.scala-lang</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
             <exclusions>
@@ -254,7 +273,7 @@
                     <diffChangeLogFile>src/main/resources/liquibase/changelog/yyyyMMddHHmmss_changelog.xml
                     </diffChangeLogFile>
                     <driver>org.h2.Driver</driver>
-                    <url>jdbc:h2:file:/data/h2/mockrest;DB_CLOSE_DELAY=-1</url>
+                    <url>jdbc:h2:file:./target/db/mockrest.db</url>
                     <referenceUrl>
                         hibernate:spring:com.github.jntakpe.mockrest.domain?dialect=org.hibernate.dialect.H2Dialect
                     </referenceUrl>

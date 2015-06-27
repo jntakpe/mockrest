@@ -37,7 +37,7 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
     database: H2
 datasource:
-  url: jdbc:h2:file:/data/h2/mockrest;DB_CLOSE_DELAY=-1
+  url: jdbc:h2:file:./target/db/mockrest.db
   username:
   password:
   dataSourceClassName: org.h2.jdbcx.JdbcDataSource
