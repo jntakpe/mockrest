@@ -4,13 +4,13 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <property name="now" value="current_timestamp" dbms="h2"/>
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
 
-    <changeSet id="00000000000000" author="jntakpe" dbms="h2">
+    <changeSet id="00000000000000" author="jntakpe" dbms="postgresql">
         <createSequence sequenceName="hibernate_sequence" startValue="1000" incrementBy="1"/>
     </changeSet>
 
-    <changeSet id="00000000000001" author="jntakpe">
+    <changeSet id="00000000000001" author="jntakpe" dbms="postgresql">
         <createTable tableName="api_user">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -99,7 +99,7 @@
     </changeSet>
 
     <!-- OAuth authentication -->
-    <changeSet id="2" author="jntakpe">
+    <changeSet id="2" author="jntakpe" dbms="postgresql">
         <createTable tableName="oauth_client_details">
             <column name="client_id" type="varchar(255)">
                 <constraints nullable="false" primaryKey="true"/>

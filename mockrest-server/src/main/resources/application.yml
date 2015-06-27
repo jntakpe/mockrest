@@ -34,10 +34,10 @@ authentication:
 spring:
   profiles: dev
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    database: H2
+    database-platform: org.hibernate.dialect.PostgreSQL82Dialect
+    database: postgresql
 datasource:
-  url: jdbc:h2:file:./target/db/mockrest.db
-  username:
-  password:
-  dataSourceClassName: org.h2.jdbcx.JdbcDataSource
+  url: jdbc:postgresql://localhost:5432/mockrest
+  username: postgres
+  password: sopra*
+  dataSourceClassName: org.postgresql.ds.PGSimpleDataSource

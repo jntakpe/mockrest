@@ -272,10 +272,12 @@
                     <changeLogFile>src/main/resources/liquibase/master.xml</changeLogFile>
                     <diffChangeLogFile>src/main/resources/liquibase/changelog/yyyyMMddHHmmss_changelog.xml
                     </diffChangeLogFile>
-                    <driver>org.h2.Driver</driver>
-                    <url>jdbc:h2:file:./target/db/mockrest.db</url>
+                    <driver>org.postgresql.Driver</driver>
+                    <url>jdbc:postgresql://localhost:5432/ezquiz</url>
+                    <username>postgres</username>
+                    <password>sopra*</password>
                     <referenceUrl>
-                        hibernate:spring:com.github.jntakpe.mockrest.domain?dialect=org.hibernate.dialect.H2Dialect
+                        hibernate:spring:com.github.jntakpe.mockrest.domain?dialect=org.hibernate.dialect.PostgreSQL82Dialect
                     </referenceUrl>
                     <verbose>true</verbose>
                     <logging>debug</logging>
