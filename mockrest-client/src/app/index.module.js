@@ -1,30 +1,15 @@
-/* global malarkey:false, toastr:false, moment:false */
-import config from './index.config';
+'use strict';
 
-import routerConfig from './index.route';
+import config from './index.config.js';
+import routerConfig from './index.route.js';
+import runConfig from './index.run.js';
 
-import runBlock from './index.run';
-import MainController from './main/main.controller';
-import GithubContributorService from '../app/components/githubContributor/githubContributor.service';
-import WebDevTecService from '../app/components/webDevTec/webDevTec.service';
-import NavbarDirective from '../app/components/navbar/navbar.directive';
-import MalarkeyDirective from '../app/components/malarkey/malarkey.directive';
+import coreModule from './components/core/core.js';
+import homeModule from './home/home.js';
 
-angular.module('mockrest', ['restangular', 'ui.router', 'ngMaterial'])
-    .constant('malarkey', malarkey)
-    .constant('toastr', toastr)
-    .constant('moment', moment)
-    .config(config)
 
-    .config(routerConfig)
-
-    .run(runBlock)
-    .service('githubContributor', GithubContributorService)
-    .service('webDevTec', WebDevTecService)
-    .controller('MainController', MainController)
-    .directive('acmeNavbar', () = > new NavbarDirective()
-)
-.
-directive('acmeMalarkey', () = > new MalarkeyDirective(malarkey)
-)
-;
+angular.module('mockrest', [
+    coreModule.name,
+    homeModule.name
+]).config(config)
+    .config(routerConfig);
