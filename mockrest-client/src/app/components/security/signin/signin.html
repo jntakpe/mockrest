@@ -1,0 +1,28 @@
+<div class="portal-bg" layout="row" layout-fill>
+    <div class="signin-container">
+        <div class="signin-card md-whiteframe-glow-z2">
+            <div class="logo-image">
+                <img src="assets/images/sopra_steria.png" alt="Logo">
+            </div>
+
+            <h1 id="login-title">Connexion</h1>
+
+            <p id="login-desc">Nom d'utilisateur et mot de passe</p>
+
+            <form role="form">
+                <md-input-container>
+                    <md-icon md-svg-src="assets/images/icons/ic_person_24px.svg"></md-icon>
+                    <input id="username" name="username" ng-model="signin.user.username" placeholder="Login"
+                           type="text">
+                </md-input-container>
+                <md-input-container>
+                    <md-icon md-svg-src="assets/images/icons/ic_lock_24px.svg"></md-icon>
+                    <input id="password" name="password" ng-model="signin.user.password" placeholder="Password"
+                           type="password">
+                </md-input-container>
+                <md-button id="signin-btn" class="md-primary md-raised" ng-click="signin.login()" layout-fill>Connexion
+                </md-button>
+            </form>
+        </div>
+    </div>
+</div>

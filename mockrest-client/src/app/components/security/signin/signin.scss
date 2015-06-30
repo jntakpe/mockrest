@@ -1,0 +1,49 @@
+.portal-bg {
+  background: url(/assets/images/portal.png) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.signin-container {
+  margin: auto;
+}
+
+.signin-card {
+  border-radius: 2px;
+  padding: 20px;
+  background: white;
+
+  .logo-image, h1, p {
+    text-align: center;
+  }
+
+  #signin-btn {
+    margin: 10px 0 0 0;
+  }
+}
+
+.signin-card {
+  .logo-image, h1, p {
+    text-align: center;
+  }
+}
+
+#login-title {
+  font-size: 28px;
+  font-weight: 100;
+  line-height: 1.2;
+  color: #757575;
+  text-transform: inherit;
+  letter-spacing: inherit;
+}
+
+#login-desc {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.1;
+  color: #212121;
+  text-transform: inherit;
+  letter-spacing: inherit;
+}

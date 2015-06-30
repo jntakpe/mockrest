@@ -5,10 +5,17 @@ import HomeCtrl from './home.controller';
 export default angular
     .module('mockrest-home', ['mockrest-core'])
     .config($stateProvider => {
-        $stateProvider.state('home', {
+        $stateProvider.state('main.home', {
             url: '/',
-            controller: HomeCtrl,
-            controllerAs: 'home',
-            templateUrl: 'app/home/home.html'
+            data: {
+                roles: ['ROLE_USER', 'ROLE_ADMIN']
+            },
+            views: {
+                'content@layout': {
+                    templateUrl: 'app/home/home.html',
+                    controller: HomeCtrl,
+                    controllerAs: 'home'
+                }
+            }
         });
     });
