@@ -15,6 +15,8 @@ function browserSyncInit(baseDir, browser) {
     browser = browser === undefined ? 'default' : browser;
 
     var routes = null;
+    var proxyRoutes = ['/api', '/oauth'];
+
     if (baseDir === conf.paths.src || (util.isArray(baseDir) && baseDir.indexOf(conf.paths.src) !== -1)) {
         routes = {
             '/bower_components': 'bower_components'
@@ -33,7 +35,13 @@ function browserSyncInit(baseDir, browser) {
      *
      * For more details and option, https://github.com/chimurai/http-proxy-middleware/blob/v0.0.5/README.md
      */
-    // server.middleware = proxyMiddleware('/users', {target: 'http://jsonplaceholder.typicode.com', proxyHost: 'jsonplaceholder.typicode.com'});
+    server.middleware = (function () {
+        var middlewares = [];
+        proxyRoutes.forEach(function (route) {
+            middlewares.push(proxyMiddleware(route, {target: 'http://localhost:8080'}));
+        });
+        return middlewares;
+    })();
 
     browserSync.instance = browserSync.init({
         startPath: '/',
