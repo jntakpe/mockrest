@@ -28,7 +28,7 @@ liquibase:
 authentication:
     oauth:
         clientId: mockrestserver
-        secret: ezquizsupersecret
+        secret: mockrestsupersecret
         tokenValidityInSeconds: 1800
 ---
 spring:

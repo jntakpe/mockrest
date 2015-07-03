@@ -14,7 +14,7 @@ export default class OAuth2Service {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Accept': 'application/json',
-                'Authorization': 'Basic ' + window.btoa('ezquiz' + ':' + 'ezquizsupersecret')
+                'Authorization': 'Basic ' + window.btoa('mockrestserver' + ':' + 'mockrestsupersecret')
             }
         }).success((response) => {
             var expiredAt = new Date();
