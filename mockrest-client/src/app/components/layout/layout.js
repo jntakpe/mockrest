@@ -4,7 +4,8 @@ import SidenavCtrl from './sidenav/sidenav.controller';
 import SidenavService from './sidenav/sidenav.service';
 import humanizeDoc from './sidenav/sidenav.filter';
 import HeaderCtrl from './header/header.controller';
-import {menuLink, menuToggle} from './sidenav/sidenav.directive';
+import menuLink from './sidenav/menu-link.directive';
+import menuToggle from './sidenav/menu-toggle.directive';
 
 export default angular
     .module('mockrest-layout', ['mockrest-core', 'mockrest-security'])

@@ -8,9 +8,11 @@
 
 .signin-container {
   margin: auto;
+
 }
 
 .signin-card {
+  width: 400px;
   border-radius: 2px;
   padding: 20px;
   background: white;
@@ -31,7 +33,7 @@
 }
 
 #login-title {
-  font-size: 28px;
+  font-size: 36px;
   font-weight: 100;
   line-height: 1.2;
   color: #757575;

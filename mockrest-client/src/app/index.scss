@@ -4,14 +4,14 @@
  */
 // bower:scss
 // endbower
-@import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:400,700,700italic,400italic);
+@import url(https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic);
+
+$header-primary: #185694;
+$header-bg: #106CC8;
+$header-border: #267ED5;
 
 html {
   font-family: 'Roboto Slab', serif;
-}
-
-[layout=row] {
-  flex-direction: row;
 }
 
 .browsehappy {
@@ -21,43 +21,24 @@ html {
   padding: 0.2em 0;
 }
 
-.thumbnail {
-  height: 200px;
-
-  img.pull-right {
-    width: 50px;
-  }
+a {
+  color: $header-bg;
+  text-decoration: none;
+  font-weight: 400;
+  border-bottom: 1px solid rgba(64, 84, 178, 0.25);
+  -webkit-transition: border-bottom 0.35s;
+  -moz-transition: border-bottom 0.35s;
+  -ms-transition: border-bottom 0.35s;
+  -o-transition: border-bottom 0.35s;
+  transition: border-bottom 0.35s;
 }
 
-md-toolbar.md-default-theme {
-  background-color: black;
+a:hover, a:focus {
+  border-bottom: 1px solid #4054B2;
 }
 
-section.jumbotron {
-  margin-bottom: 30px;
-  padding: 1px 30px;
-  background-color: #5aadbb;
-  text-align: center;
-
-  color: white;
-
-  h1 {
-    font-size: 3em;
-  }
-}
-
-.techs {
-  display: flex;
-  flex-flow: row wrap;
-
-  md-card {
-    width: 30%;
-
-    img.pull-right {
-      float: right;
-      width: 50px;
-    }
-  }
+a.md-button {
+  border-bottom: none;
 }
 
 /**

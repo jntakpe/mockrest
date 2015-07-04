@@ -1,12 +1,15 @@
 <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2" md-component-id="menu-left"
             md-is-locked-open="$mdMedia('gt-sm')" tabindex="-1" flex>
-    <md-toolbar class="md-theme-indigo" layout="row">
-        <img src="assets/images/sopra_steria.png" alt="Sopra Steria Logo" class="app-logo"/>
 
-        <h1 class="md-toolbar-tools">EzQuiz</h1>
-    </md-toolbar>
-    <md-content layout-padding role="navigation" class="nav-content" flex>
-        <ul class="docs-menu">
+    <header class="nav-header">
+        <a ui-sref="main.home" class="app-logo">
+            <img src="assets/images/angular-logo.svg" alt="Application logo"/>
+
+            <h1 class="logo-title">Mockrest</h1>
+        </a>
+    </header>
+    <md-content role="navigation" flex>
+        <ul class="sidenav-menu">
             <li ng-repeat="section in sidenav.menuContent" class="parent-list-item"
                 ng-class="{'parentActive' : sidenav.isSectionSelected(section)}">
                 <h2 class="menu-heading md-subhead" ng-if="section.type === 'heading'" id="heading_{{ section.name }}">
