@@ -9,10 +9,7 @@
 $header-primary: #185694;
 $header-bg: #106CC8;
 $header-border: #267ED5;
-
-html {
-  font-family: 'Roboto Slab', serif;
-}
+$link-hover: #4054B2;
 
 .browsehappy {
   margin: 0.2em 0;
@@ -34,7 +31,7 @@ a {
 }
 
 a:hover, a:focus {
-  border-bottom: 1px solid #4054B2;
+  border-bottom: 1px solid $link-hover;
 }
 
 a.md-button {
