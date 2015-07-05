@@ -22,7 +22,7 @@ export default function ($timeout) {
                 function (open) {
                     var $ul = $element.find('ul');
                     var targetHeight = open ? getTargetHeight() : 0;
-                    $timeout(function () {
+                    $timeout(() => {
                         $ul.css({height: targetHeight + 'px'});
                     }, 0, false);
 
@@ -45,4 +45,4 @@ export default function ($timeout) {
             }
         }
     };
-};
+}

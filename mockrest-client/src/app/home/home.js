@@ -7,6 +7,10 @@ export default angular
     .config($stateProvider => {
         $stateProvider.state('main.home', {
             url: '/',
+            data: {
+                breadcrumb: ['main.home', 'main.home'],
+                title: 'Accueil'
+            },
             views: {
                 'content@layout': {
                     templateUrl: 'app/home/home.html',

@@ -1,7 +1,7 @@
 'use strict';
 
 export default function () {
-    return function (doc) {
+    return (doc) => {
         if (!doc) {
             return;
         }

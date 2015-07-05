@@ -2,13 +2,13 @@
 
 export default class SidenavCtrl {
 
-    constructor(sidenavService) {
-        this.sidenavService = sidenavService;
-        this.menuContent = sidenavService.getMenuContent('ROLE_ADMIN');
+    constructor(SidenavService) {
+        this.SidenavService = SidenavService;
+        this.menuContent = SidenavService.getMenuContent('ROLE_ADMIN');
     }
 
     isSectionSelected(section) {
-        var selected = false, openedSection = this.sidenavService.openedSection;
+        var selected = false, openedSection = this.SidenavService.openedSection;
         if (openedSection === section) {
             selected = true;
         }
@@ -23,14 +23,14 @@ export default class SidenavCtrl {
     }
 
     isSelected(page) {
-        return this.sidenavService.isPageSelected(page);
+        return this.SidenavService.isPageSelected(page);
     }
 
     isOpen(section) {
-        return this.sidenavService.isSectionSelected(section);
+        return this.SidenavService.isSectionSelected(section);
     }
 
     toggleOpen(section) {
-        this.sidenavService.toggleSelectSection(section);
+        this.SidenavService.toggleSelectSection(section);
     }
 }

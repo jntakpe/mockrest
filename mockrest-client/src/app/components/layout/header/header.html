@@ -1,10 +1,17 @@
 <div class="md-toolbar-tools header-toolbar-tools">
     <md-button class="md-icon-button" aria-label="Toggle Menu" ng-click="header.openMenu()" hide-gt-sm>
-        <md-icon md-svg-src="assets/images/icons/ic_menu_24px.svg" class="s24"></md-icon>
+        <md-icon class="material-icons">menu</md-icon>
     </md-button>
     <div class="fill-height" layout="row" flex>
         <h2 class="md-toolbar-item md-breadcrumb md-headline" flex>
-            <span class="md-breadcrumb-page">Breadcrumb</span>
+            <span ng-repeat="parent in header.breadcrumb.parents">
+                <span hide-sm hide-md>{{parent.title}}</span>
+                <span class="header-separator-icon" hide-sm hide-md>
+                    <span class="md-visually-hidden">-</span>
+                    <md-icon class="material-icons" hide-sm hide-md>chevron_right</md-icon>
+              </span>
+            </span>
+            <span class="md-breadcrumb-page">{{header.breadcrumb.title}}</span>
         </h2>
 
         <div class="md-toolbar-item" ng-if="header.username">
