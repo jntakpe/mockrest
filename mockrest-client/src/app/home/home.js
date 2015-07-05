@@ -7,9 +7,6 @@ export default angular
     .config($stateProvider => {
         $stateProvider.state('main.home', {
             url: '/',
-            data: {
-                roles: ['ROLE_USER', 'ROLE_ADMIN']
-            },
             views: {
                 'content@layout': {
                     templateUrl: 'app/home/home.html',

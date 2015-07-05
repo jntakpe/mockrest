@@ -2,11 +2,12 @@
 
 export default class HeaderCtrl {
 
-    constructor($timeout, $mdSidenav, authService, authorize) {
+    constructor($timeout, $mdSidenav, authorize) {
         this.$timeout = $timeout;
         this.$mdSidenav = $mdSidenav;
-        this.authService = authService;
-        this.username = authorize.login;
+        if (authorize) {
+            this.username = authorize.login;
+        }
     }
 
     openMenu() {

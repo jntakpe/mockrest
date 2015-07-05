@@ -28,8 +28,11 @@ export default angular
                 }
             },
             resolve: {
-                authorize: authService => {
-                    return authService.authorize();
+                authorize: (authService, principalService) => {
+                    if (principalService.isAuthenticated()) {
+                        return authService.authorize();
+                    }
+                    return {};
                 }
             }
         });

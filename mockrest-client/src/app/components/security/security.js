@@ -11,13 +11,9 @@ export default angular
     .config(($stateProvider, $urlRouterProvider, $httpProvider, localStorageServiceProvider) => {
         $stateProvider.state('login', {
             url: '/login?logout',
-            views: {
-                '': {
-                    templateUrl: 'app/components/security/signin/signin.html',
-                    controller: SigninCtrl,
-                    controllerAs: 'signin'
-                }
-            }
+            templateUrl: 'app/components/security/signin/signin.html',
+            controller: SigninCtrl,
+            controllerAs: 'signin'
         });
         $httpProvider.interceptors.push('authInterceptor');
         $httpProvider.interceptors.push('authExpiredInterceptor');
