@@ -4,6 +4,6 @@
 <![endif]-->
 <section ui-view="sidenav" layout="column"></section>
 <div layout="column" tabindex="-1" role="main" flex>
-    <section ui-view="header"></section>
-    <section ui-view="content"></section>
+    <md-toolbar class="md-whiteframe-glow-z1 site-content-toolbar" ui-view="header"></md-toolbar>
+    <md-content class="content" ui-view="content" flex layout-padding></md-content>
 </div>

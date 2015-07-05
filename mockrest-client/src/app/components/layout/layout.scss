@@ -1,0 +1,30 @@
+md-content.content {
+  margin: 16px;
+}
+
+a {
+  color: $sidenav-bg;
+  text-decoration: none;
+  font-weight: 400;
+  border-bottom: 1px solid rgba(64, 84, 178, 0.25);
+  -webkit-transition: border-bottom 0.35s;
+  -moz-transition: border-bottom 0.35s;
+  -ms-transition: border-bottom 0.35s;
+  -o-transition: border-bottom 0.35s;
+  transition: border-bottom 0.35s;
+}
+
+a:hover, a:focus {
+  border-bottom: 1px solid $link-hover;
+}
+
+a.md-button {
+  border-bottom: none;
+}
+
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}

@@ -1,6 +1,6 @@
 'use strict';
 
-import config from './index.config.js';
+import themingConfig from './index.theme.js';
 import routerConfig from './index.route.js';
 import runConfig from './index.run.js';
 
@@ -16,5 +16,5 @@ angular.module('mockrest', [
     layoutModule.name,
     securityModule.name,
     homeModule.name
-]).config(config)
+]).config(themingConfig)
     .config(routerConfig);
