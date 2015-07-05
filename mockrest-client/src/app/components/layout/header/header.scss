@@ -1,0 +1,26 @@
+.site-content-toolbar {
+  background: #f6f6f6 !important;
+  color: #202020 !important;
+  z-index: 3;
+}
+
+.header-toolbar-tools {
+  padding: 0;
+  margin: 0 24px;
+  width: auto;
+}
+
+.md-toolbar-tools .md-breadcrumb {
+  font-size: 24px;
+  font-weight: 400;
+
+  md-icon {
+    color: #666;
+  }
+
+  .md-breadcrumb-page {
+    display: inline-block;
+    word-wrap: break-word;
+  }
+}
+

@@ -6,9 +6,9 @@
 // endbower
 @import url(https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic);
 
-$header-primary: #185694;
-$header-bg: #106CC8;
-$header-border: #267ED5;
+$sidenav-primary: #185694;
+$sidenav-bg: #106CC8;
+$sidenav-border: #267ED5;
 $link-hover: #4054B2;
 
 .browsehappy {
@@ -19,7 +19,7 @@ $link-hover: #4054B2;
 }
 
 a {
-  color: $header-bg;
+  color: $sidenav-bg;
   text-decoration: none;
   font-weight: 400;
   border-bottom: 1px solid rgba(64, 84, 178, 0.25);
@@ -36,6 +36,12 @@ a:hover, a:focus {
 
 a.md-button {
   border-bottom: none;
+}
+
+.md-whiteframe-glow-z1 {
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.14),
+  0 0 2px 2px rgba(0, 0, 0, 0.098),
+  0 0 5px 1px rgba(0, 0, 0, 0.084);
 }
 
 /**

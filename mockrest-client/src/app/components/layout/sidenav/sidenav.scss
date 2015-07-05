@@ -1,5 +1,5 @@
 .site-sidenav {
-  background: $header-bg;
+  background: $sidenav-bg;
 }
 
 .site-sidenav md-content {
@@ -19,13 +19,13 @@
 }
 
 .nav-header {
-  background-color: $header-bg;
-  background: linear-gradient($header-primary, $header-bg);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, $header-primary), color-stop(1, $header-bg));
-  background: -webkit-linear-gradient(top, $header-primary 0%, $header-bg 100%);
-  background: -moz-linear-gradient(top, $header-primary 0%, $header-bg 100%);
-  background: linear-gradient(top, $header-primary 0%, $header-bg 100%);
-  border-bottom: 1px solid $header-border;
+  background-color: $sidenav-bg;
+  background: linear-gradient($sidenav-primary, $sidenav-bg);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, $sidenav-primary), color-stop(1, $sidenav-bg));
+  background: -webkit-linear-gradient(top, $sidenav-primary 0%, $sidenav-bg 100%);
+  background: -moz-linear-gradient(top, $sidenav-primary 0%, $sidenav-bg 100%);
+  background: linear-gradient(top, $sidenav-primary 0%, $sidenav-bg 100%);
+  border-bottom: 1px solid $sidenav-border;
   flex-shrink: 0;
   z-index: 2;
 
@@ -69,7 +69,7 @@
   }
 
   > li {
-    border-bottom: 1px solid $header-border;
+    border-bottom: 1px solid $sidenav-border;
   }
 
   > li:nth-child(1) {
@@ -94,11 +94,11 @@
   }
 
   .md-button:hover, md-button:focus {
-    background: $header-border !important;
+    background: $sidenav-border !important;
   }
 
   .md-button.active {
-    background: $header-border;
+    background: $sidenav-border;
   }
 
   .md-button md-icon {
