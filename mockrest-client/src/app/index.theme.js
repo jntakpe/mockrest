@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('fra').config(themingConfig);
+    angular.module('mockrest').config(themingConfig);
 
     function themingConfig($mdThemingProvider) {
         $mdThemingProvider.definePalette('custom-blue', $mdThemingProvider.extendPalette('blue', {

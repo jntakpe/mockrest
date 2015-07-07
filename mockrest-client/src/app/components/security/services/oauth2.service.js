@@ -14,7 +14,7 @@
 
         function login(credentials) {
             var data = 'username=' + credentials.username + '&password=' + credentials.password +
-                '&grant_type=password&scope=read%20xwrite&';
+                '&grant_type=password&scope=read%20write&';
             return $http.post('oauth/token', data, {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',

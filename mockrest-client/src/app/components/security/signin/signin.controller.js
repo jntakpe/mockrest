@@ -6,9 +6,11 @@
     function SignCtrl($rootScope, $state, $stateParams, $mdToast, authService) {
         var vm = this;
 
+        vm.error = false;
+
         authService.logout();
         if ($stateParams.logout) {
-            this.$mdToast.show(this.$mdToast.simple().content('Logged out successfully').position('top'));
+            $mdToast.show($mdToast.simple().content('Logged out successfully').position('top'));
         }
 
         vm.login = function () {
@@ -16,7 +18,7 @@
                 username: vm.user.username,
                 password: vm.user.password
             }).then(function () {
-                error = false;
+                vm.error = false;
                 if ($rootScope.previousStateName === 'register') {
                     $state.go('main.home');
                 } else {

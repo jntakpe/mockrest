@@ -9,7 +9,7 @@
         vm.menuContent = menuContent;
         vm.toggleOpen = toggleOpen;
         vm.isSelected = isSelected;
-        vm.isSectionSelected = isSectionSelected;
+        vm.isSectionActive = isSectionActive;
         vm.isOpen = isOpen;
 
         function isSelected(page) {
@@ -24,8 +24,8 @@
             sidenavService.toggleSelectSection(section);
         }
 
-        function isSectionSelected(section) {
-            return sidenavService.isSectionSelected(section);
+        function isSectionActive(section) {
+            return sidenavService.isSectionActive(section);
         }
     }
 

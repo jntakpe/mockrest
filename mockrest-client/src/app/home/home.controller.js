@@ -4,5 +4,8 @@
     angular.module('mockrest-home').controller('HomeCtrl', HomeCtrl);
 
     function HomeCtrl() {
+        var vm = this;
+
+        vm.text = 'Mais lol';
     }
 })();

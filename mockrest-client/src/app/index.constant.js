@@ -3,7 +3,7 @@
 
     /* global toastr:false, moment:false */
 
-    angular.module('fra')
+    angular.module('mockrest')
         .constant('moment', moment)
         .constant('toastr', toastr);
 })();

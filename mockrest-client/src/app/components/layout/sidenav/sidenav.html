@@ -11,7 +11,7 @@
     <md-content role="navigation" flex>
         <ul class="sidenav-menu">
             <li ng-repeat="section in sidenav.menuContent" class="parent-list-item"
-                ng-class="{'parentActive' : sidenav.isSectionSelected(section)}">
+                ng-class="{'parentActive' : sidenav.isSectionActive(section)}">
                 <h2 class="menu-heading md-subhead" ng-if="section.type === 'heading'" id="heading_{{ section.name }}">
                     {{section.name}}
                 </h2>
@@ -21,7 +21,7 @@
 
                 <ul ng-if="section.children" class="menu-nested-list">
                     <li ng-repeat="child in section.children"
-                        ng-class="{'childActive' : sidenav.isSectionSelected(child)}">
+                        ng-class="{'childActive' : sidenav.isSectionActive(child)}">
                         <menu-link section="child" ng-if="child.type === 'link'"></menu-link>
 
                         <menu-toggle section="child" ng-if="child.type === 'toggle'"></menu-toggle>

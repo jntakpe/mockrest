@@ -4,18 +4,19 @@
     angular.module('mockrest-layout').controller('HeaderCtrl', HeaderCtrl);
 
 
-    function HeaderCtrl($scope, $timeout, $mdSidenav, HeaderService, authorize) {
+    function HeaderCtrl($scope, $timeout, $mdSidenav, headerService, authorize) {
         var vm = this;
+
+        vm.openMenu = openMenu;
 
         if (authorize) {
             vm.username = authorize.login;
         }
 
         $scope.$on('$stateChangeSuccess', function refreshBreadcrumb() {
-            vm.breadcrumb = HeaderService.breadcrumbData();
+            vm.breadcrumb = headerService.breadcrumbData();
         });
 
-        vm.openMenu = openMenu;
 
         function openMenu() {
             $timeout(function () {

@@ -15,7 +15,7 @@
 
         function parentsData() {
             var breadcrumb = [];
-            currentData().forEach(function (stateName) {
+            currentData().breadcrumb.forEach(function (stateName) {
                 breadcrumb.push({
                     title: $state.get(stateName).data.title,
                     name: stateName

@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('mockrest-client').directive('menuToggle', menuToggle);
+    angular.module('mockrest-layout').directive('menuToggle', menuToggle);
 
     function menuToggle($timeout) {
         return {

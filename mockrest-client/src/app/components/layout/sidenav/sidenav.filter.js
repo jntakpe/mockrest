@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('humanizeMenu', humanizeMenu);
+    angular.module('mockrest-layout').filter('humanizeMenu', humanizeMenu);
 
     function humanizeMenu() {
         return function (menu) {

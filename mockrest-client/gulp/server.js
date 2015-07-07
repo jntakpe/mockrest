@@ -20,7 +20,7 @@ function browserSyncInit(baseDir, browser) {
     if (baseDir === conf.paths.src || (util.isArray(baseDir) && baseDir.indexOf(conf.paths.src) !== -1)) {
         routes = {
             '/bower_components': 'bower_components'
-        };
+    };
     }
 
     var server = {

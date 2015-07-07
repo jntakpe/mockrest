@@ -1,8 +1,7 @@
 (function () {
     'use strict';
 
-    angular
-        .module('mockrest', [
+    angular.module('mockrest', [
             'mockrest-core',
             'mockrest-layout',
             'mockrest-security',

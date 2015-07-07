@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('ezquiz-error').config(configState);
+    angular.module('mockrest-error').config(configState);
 
     function configState($stateProvider) {
         $stateProvider.state('404', {

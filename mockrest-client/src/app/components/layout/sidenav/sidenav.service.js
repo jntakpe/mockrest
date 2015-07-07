@@ -12,7 +12,8 @@
             toggleSelectSection: toggleSelectSection,
             isSectionSelected: isSectionSelected,
             selectPage: selectPage,
-            isPageSelected: isPageSelected
+            isPageSelected: isPageSelected,
+            isSectionActive: isSectionActive
         };
 
         function selectSection(section) {
@@ -24,18 +25,7 @@
         }
 
         function isSectionSelected(section) {
-            var selected = false, openedSection = openedSection === section;
-            if (openedSection === section) {
-                selected = true;
-            }
-            else if (section.children) {
-                section.children.forEach(function (childSection) {
-                    if (childSection === openedSection) {
-                        selected = true;
-                    }
-                });
-            }
-            return selected;
+            return openedSection === section;
         }
 
         function selectPage(section, page) {
@@ -45,6 +35,20 @@
 
         function isPageSelected(page) {
             return currentPage === page;
+        }
+
+        function isSectionActive(section) {
+            if (isSectionSelected(section)) {
+                return true;
+            }
+            else if (section.children) {
+                section.children.forEach(function (childSection) {
+                    if (isSectionSelected(childSection)) {
+                        return true;
+                    }
+                });
+            }
+            return false;
         }
 
     }

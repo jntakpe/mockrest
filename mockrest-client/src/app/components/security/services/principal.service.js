@@ -5,7 +5,7 @@
 
     var identity, authenticated;
 
-    function principalService() {
+    function principalService($q, $http) {
 
         return {
             isIdentityResolved: isIdentityResolved,

@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('mockrest-client').directive('menuLink', menuLink);
+    angular.module('mockrest-layout').directive('menuLink', menuLink);
 
     function menuLink() {
 
