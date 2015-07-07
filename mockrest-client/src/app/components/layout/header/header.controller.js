@@ -1,20 +1,23 @@
-'use strict';
+(function () {
+    'use strict';
 
-export default class HeaderCtrl {
+    angular.module('mockrest-layout').controller('HeaderCtrl', HeaderCtrl);
 
-    constructor($timeout, $mdSidenav, $scope, HeaderService, authorize) {
-        this.$timeout = $timeout;
-        this.$mdSidenav = $mdSidenav;
+    function HeaderCtrl($scope, $timeout, $mdSidenav, HeaderService, authorize) {
+        var vm = this;
+
         if (authorize) {
-            this.username = authorize.login;
+            vm.username = authorize.login;
         }
-        $scope.$on('$stateChangeSuccess', () => {
-            this.breadcrumb = HeaderService.breadcrumbData();
+        $scope.$on('$stateChangeSuccess', function refreshBreadcrumb() {
+            vm.breadcrumb = HeaderService.breadcrumbData();
         });
+
+        vm.openMenu = function () {
+            $timeout(function () {
+                $mdSidenav('menu-left').open();
+            });
+        }
     }
 
-    openMenu() {
-        this.$timeout(() => this.$mdSidenav('menu-left').open());
-    }
-
-}
+})();

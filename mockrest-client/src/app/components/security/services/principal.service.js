@@ -1,62 +1,69 @@
-'use strict';
+(function () {
+    'use strict';
 
-export default class PrincipalService {
+    angular.module('mockrest-security').factory('principalService', principalService);
 
-    constructor($q, $http) {
-        this.$q = $q;
-        this.$http = $http;
-        this.identity = null;
-        this.authenticated = false;
+    var identity, authenticated;
+
+    function principalService() {
+        return {
+            isIdentityResolved: isIdentityResolved,
+            isAuthenticated: isAuthenticated,
+            isInRole: isInRole,
+            isInAnyRole: isInAnyRole,
+            authenticate: authenticate,
+            resolveIdentity: resolveIdentity
+        };
     }
 
-    isIdentityResolved() {
-        return this.identity !== null;
+    function isIdentityResolved() {
+        return identity !== null;
     }
 
-    isAuthenticated() {
-        return this.authenticated;
+    function isAuthenticated() {
+        return authenticated;
     }
 
-    isInRole(role) {
-        return this.authenticated && this.identity && this.identity.roles && this.identity.roles.indexOf(role) !== -1;
+    function isInRole(role) {
+        return authenticated && identity && identity.roles && identity.roles.indexOf(role) !== -1;
     }
 
-    isInAnyRole(roles) {
-        if (!this.authenticated || !this.identity) {
+    function isInAnyRole(roles) {
+        if (!authenticated || !identity) {
             return false;
         }
-        for (let role of roles) {
-            if (this.isInRole(role)) {
+        roles.forEach(function (role) {
+            if (isInRole(role)) {
                 return true;
             }
-        }
+        });
         return false;
     }
 
-    authenticate(identity) {
-        this.identity = identity;
-        this.authenticated = identity !== null;
+    function authenticate(account) {
+        identity = account;
+        authenticated = identity !== null;
     }
 
-    resolveIdentity(force) {
-        var deferred = this.$q.defer();
+    function resolveIdentity(force) {
+        var deferred = $q.defer();
         if (force === true) {
-            this.identity = null;
+            identity = null;
         }
-        if (this.isIdentityResolved()) {
-            deferred.resolve(this.identity);
+        if (isIdentityResolved()) {
+            deferred.resolve(identity);
             return deferred.promise;
         }
-        this.$http.get('api/account').then(account => {
-            this.identity = account.data;
-            this.authenticated = true;
-            deferred.resolve(this.identity);
-        }).catch(() => {
-            this.identity = null;
-            this.authenticated = false;
-            deferred.resolve(this.identity);
+        $http.get('api/account').then(function (account) {
+            identity = account.data;
+            authenticated = true;
+            deferred.resolve(identity);
+        }).catch(function () {
+            identity = null;
+            authenticated = false;
+            deferred.resolve(identity);
         });
         return deferred.promise;
     }
 
-}
+})();

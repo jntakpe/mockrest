@@ -1,31 +1,38 @@
-'use strict';
+(function () {
+    'use strict';
 
-var authExpiredInterceptor = function ($rootScope, $q, $injector, localStorageService) {
+    angular.module('mockrest-security').factory('authInterceptor', authInterceptor);
+
+    function authInterceptor($q, $injector, localStorageService) {
         return {
-            responseError: function (response) {
-                if (response.status === 401 && (response.data.error === 'invalid_token' || response.data.error === 'Unauthorized')) {
-                    localStorageService.remove('token');
-                    var principalService = $injector.get('principalService');
-                    if (principalService.isAuthenticated()) {
-                        var authService = $injector.get('authService');
-                        authService.authorize(true);
+            responseError: responseError,
+            authInterceptor: authInterceptor
+        };
+
+        function responseError(response) {
+            if (response.status === 401 && (response.data.error === 'invalid_token' || response.data.error === 'Unauthorized')) {
+                localStorageService.remove('token');
+                var principalService = $injector.get('principalService');
+                if (principalService.isAuthenticated()) {
+                    var authService = $injector.get('authService');
+                    authService.authorize(true);
+                }
+            }
+            return $q.reject(response);
+        }
+
+        function authInterceptor(localStorageService) {
+            return {
+                request: function (config) {
+                    config.headers = config.headers || {};
+                    var token = localStorageService.get('token');
+                    if (token && token.expires_at && token.expires_at > new Date().getTime()) {
+                        config.headers.Authorization = 'Bearer ' + token.access_token;
                     }
+                    return config;
                 }
-                return $q.reject(response);
-            }
-        };
-    },
-    authInterceptor = function ($rootScope, $q, $location, localStorageService) {
-        return {
-            request: function (config) {
-                config.headers = config.headers || {};
-                var token = localStorageService.get('token');
-                if (token && token.expires_at && token.expires_at > new Date().getTime()) {
-                    config.headers.Authorization = 'Bearer ' + token.access_token;
-                }
-                return config;
-            }
-        };
-    };
+            };
+        }
 
-export {authExpiredInterceptor, authInterceptor};
+    }
+})();

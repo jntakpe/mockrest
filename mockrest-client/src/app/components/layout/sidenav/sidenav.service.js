@@ -1,31 +1,40 @@
-'use strict';
+(function () {
+    'use strict';
 
-import menuContent from './menu-content';
+    angular.module('mockrest-layout').factory('sidenavService', sidenavService);
 
-export default class SidenavService {
+    function sidenavService() {
 
-    selectSection(section) {
-        this.openedSection = section;
+        var openedSection, currentSection, currentPage;
+
+        return {
+            selectSection: selectSection,
+            toggleSelectSection: toggleSelectSection,
+            isSectionSelected: isSectionSelected,
+            selectPage: selectPage,
+            isPageSelected: isPageSelected
+        };
+
+        function selectSection(section) {
+            openedSection = section;
+        }
+
+        function toggleSelectSection(section) {
+            openedSection = (openedSection === section ? null : section);
+        }
+
+        function isSectionSelected(section) {
+            return openedSection === section;
+        }
+
+        function selectPage(section, page) {
+            currentSection = section;
+            currentPage = page;
+        }
+
+        function isPageSelected(page) {
+            return currentPage === page;
+        }
+
     }
-
-    toggleSelectSection(section) {
-        this.openedSection = (this.openedSection === section ? null : section);
-    }
-
-    isSectionSelected(section) {
-        return this.openedSection === section;
-    }
-
-    selectPage(section, page) {
-        this.currentSection = section;
-        this.currentPage = page;
-    }
-
-    isPageSelected(page) {
-        return this.currentPage === page;
-    }
-
-    getMenuContent(role) {
-        return menuContent(role);
-    }
-}
+})();

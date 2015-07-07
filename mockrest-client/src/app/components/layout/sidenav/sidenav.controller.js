@@ -1,36 +1,39 @@
 'use strict';
 
-export default class SidenavCtrl {
+(function () {
+    angular.module('mockrest-layout').controller('SidenavCtrl', SidenavCtrl);
 
-    constructor(SidenavService) {
-        this.SidenavService = SidenavService;
-        this.menuContent = SidenavService.getMenuContent('ROLE_ADMIN');
+    function SidenavCtrl(sidenavService, menuContent) {
+        var vm = this;
+
+        vm.menuContent = menuContent;
+
+        vm.isSectionSelected = function (section) {
+            var selected = false, openedSection = sidenavService.openedSection;
+            if (openedSection === section) {
+                selected = true;
+            }
+            else if (section.children) {
+                section.children.forEach(function (childSection) {
+                    if (childSection === openedSection) {
+                        selected = true;
+                    }
+                });
+            }
+            return selected;
+        };
+
+        vm.isSelected = function (page) {
+            return sidenavService.isPageSelected(page);
+        };
+
+        vm.isOpen = function (section) {
+            return sidenavService.isSectionSelected(section);
+        };
+
+        vm.toggleOpen = function (section) {
+            sidenavService.toggleSelectSection(section);
+        };
     }
 
-    isSectionSelected(section) {
-        var selected = false, openedSection = this.SidenavService.openedSection;
-        if (openedSection === section) {
-            selected = true;
-        }
-        else if (section.children) {
-            section.children.forEach(function (childSection) {
-                if (childSection === openedSection) {
-                    selected = true;
-                }
-            });
-        }
-        return selected;
-    }
-
-    isSelected(page) {
-        return this.SidenavService.isPageSelected(page);
-    }
-
-    isOpen(section) {
-        return this.SidenavService.isSectionSelected(section);
-    }
-
-    toggleOpen(section) {
-        this.SidenavService.toggleSelectSection(section);
-    }
-}
+})();

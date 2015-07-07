@@ -1,48 +1,53 @@
-'use strict';
+(function () {
+    'use strict';
 
-export default function ($timeout) {
-    return {
-        scope: {
-            section: '='
-        },
-        templateUrl: 'app/components/layout/sidenav/menu-toggle.tmpl.html',
-        link: function ($scope, $element) {
-            var controller = $element.parent().controller();
-            $scope.isOpen = function () {
-                return controller.isOpen($scope.section);
-            };
-            $scope.toggle = function () {
-                controller.toggleOpen($scope.section);
-            };
+    angular.module('mockrest-client').directive('menuToggle', menuToggle);
 
-            $scope.$watch(
-                function () {
+    function menuToggle($timeout) {
+        return {
+            scope: {
+                section: '='
+            },
+            templateUrl: 'app/components/layout/sidenav/menu-toggle.tmpl.html',
+            link: function ($scope, $element) {
+                var controller = $element.parent().controller();
+                $scope.isOpen = function () {
                     return controller.isOpen($scope.section);
-                },
-                function (open) {
-                    var $ul = $element.find('ul');
-                    var targetHeight = open ? getTargetHeight() : 0;
-                    $timeout(() => {
-                        $ul.css({height: targetHeight + 'px'});
-                    }, 0, false);
+                };
+                $scope.toggle = function () {
+                    controller.toggleOpen($scope.section);
+                };
 
-                    function getTargetHeight() {
-                        var targetHeight;
-                        $ul.addClass('no-transition');
-                        $ul.css('height', '');
-                        targetHeight = $ul.prop('clientHeight');
-                        $ul.css('height', 0);
-                        $ul.removeClass('no-transition');
-                        return targetHeight;
+                $scope.$watch(
+                    function () {
+                        return controller.isOpen($scope.section);
+                    },
+                    function (open) {
+                        var $ul = $element.find('ul');
+                        var targetHeight = open ? getTargetHeight() : 0;
+                        $timeout(function () {
+                            $ul.css({height: targetHeight + 'px'});
+                        }, 0, false);
+
+                        function getTargetHeight() {
+                            var targetHeight;
+                            $ul.addClass('no-transition');
+                            $ul.css('height', '');
+                            targetHeight = $ul.prop('clientHeight');
+                            $ul.css('height', 0);
+                            $ul.removeClass('no-transition');
+                            return targetHeight;
+                        }
                     }
-                }
-            );
+                );
 
-            var parentNode = $element[0].parentNode.parentNode.parentNode;
-            if (parentNode.classList.contains('parent-list-item')) {
-                var heading = parentNode.querySelector('h2');
-                $element[0].firstChild.setAttribute('aria-describedby', heading.id);
+                var parentNode = $element[0].parentNode.parentNode.parentNode;
+                if (parentNode.classList.contains('parent-list-item')) {
+                    var heading = parentNode.querySelector('h2');
+                    $element[0].firstChild.setAttribute('aria-describedby', heading.id);
+                }
             }
-        }
-    };
-}
+        };
+
+    }
+})();

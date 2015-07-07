@@ -1,12 +1,12 @@
 'use strict';
 
-export default class NotFoundCtrl {
+(function () {
+    angular.module('mockrest-error').controller('NotFoundCtrl', NotFoundCtrl);
 
-    constructor($state) {
-        this.$state = $state;
-    }
+    function NotFoundCtrl($state) {
 
-    goHomepage() {
-        this.$state.go('main.home');
+        function goHomepage() {
+            $state.go('main.home')
+        }
     }
-}
+})();

@@ -1,5 +1,8 @@
-'use strict';
+(function () {
+    'use strict';
 
-export default class HomeCtrl {
+    angular.module('mockrest-home').controller('HomeCtrl', HomeCtrl);
 
-}
+    function HomeCtrl() {
+    }
+})();

@@ -1,31 +1,37 @@
-'use strict';
+(function () {
+    'use strict';
 
-export default class HeaderService {
+    angular.module('mockrest-layout').factory('headerService', headerService);
 
-    constructor($state) {
-        this.$state = $state;
-        this.currentData = this.$state.$current.data;
-    }
+    function headerService($state) {
 
-    parentData() {
-        var breadcrumb = [];
-        this.currentData.breadcrumb.forEach((name) => {
-            breadcrumb.push({
-                title: this.$state.get(name).data.title,
-                name: name
-            });
-        });
-        return breadcrumb;
-    }
+        return {
+            breadcrumbData: breadcrumbData
+        };
 
-    breadcrumbData() {
-        if (this.currentData) {
-            return {
-                title: this.currentData.title,
-                parents: this.parentData()
-            };
+        function currentData() {
+            return $state.$current.data;
         }
-        return {};
-    }
 
-}
+        function parentsData() {
+            var breadcrumb = [];
+            currentData().forEach(function (stateName) {
+                breadcrumb.push({
+                    title: $state.get(stateName).data.title,
+                    name: stateName
+                });
+            });
+            return breadcrumb;
+        }
+
+        function breadcrumbData() {
+            if (currentData()) {
+                return {
+                    title: currentData().title,
+                    parents: parentsData()
+                }
+            }
+            return {};
+        }
+    }
+})();

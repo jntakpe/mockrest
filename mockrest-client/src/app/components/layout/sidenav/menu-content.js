@@ -1,6 +1,8 @@
-'use strict';
+(function () {
+    'use strict';
 
-export default function (role) {
+    angular.module('mockrest-layout').constant('menuContent', menuContent);
+
     var menuContent = [],
         navtest = {
             name: 'HeadingTest',
@@ -32,5 +34,5 @@ export default function (role) {
     menuContent.push(navtest);
     menuContent.push(home);
     menuContent.push(quiz);
-    return menuContent;
-}
+
+})();

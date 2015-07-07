@@ -1,3 +1,5 @@
-'use strict';
+(function () {
+    'use strict';
 
-export default angular.module('ezquiz-error', ['ezquiz-core']);
+    angular.module('mockrest-error', ['mockrest-core']);
+})();

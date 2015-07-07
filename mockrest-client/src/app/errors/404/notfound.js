@@ -1,16 +1,11 @@
-'use strict';
+(function () {
+    'use strict';
 
-import NotFoundCtrl from './notfound.controller.js';
-
-export default angular.module('ezquiz-error').config($stateProvider => {
-    $stateProvider.state('404', {
-        url: '/404',
-        views: {
-            '': {
-                templateUrl: 'app/errors/404.html',
-                controller: NotFoundCtrl,
-                controllerAs: 'notFound'
-            }
-        }
+    angular.module('ezquiz-error').config(function ($stateProvider) {
+        $stateProvider.state('404', {
+            url: '/404',
+            templateUrl: 'app/errors/404.html',
+            controller: 'NotFoundCtrl as notFound'
+        });
     });
-});
+})();

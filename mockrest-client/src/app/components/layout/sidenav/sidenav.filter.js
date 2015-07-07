@@ -1,15 +1,19 @@
-'use strict';
+(function () {
+    'use strict';
 
-export default function () {
-    return (doc) => {
-        if (!doc) {
-            return;
-        }
-        if (doc.type === 'directive') {
-            return doc.name.replace(/([A-Z])/g, function ($1) {
-                return '-' + $1.toLowerCase();
-            });
-        }
-        return doc.label || doc.name;
-    };
-}
+    angular.module('humanizeMenu', humanizeMenu);
+
+    function humanizeMenu() {
+        return function (menu) {
+            if (!menu) {
+                return;
+            }
+            if (menu.type === 'directive') {
+                return menu.name.replace(/([A-Z])/g, function ($1) {
+                    return '-' + $1.toLowerCase();
+                });
+            }
+            return menu.label || menu.name;
+        };
+    }
+})();
