@@ -19,13 +19,13 @@
                 error = false;
                 if ($rootScope.previousStateName === 'register') {
                     $state.go('main.home');
-            } else {
+                } else {
                     $rootScope.back();
-            }
+                }
             }, function () {
                 vm.user = {};
                 $mdToast.show($mdToast.simple().content('Invalid credentials').position('top'));
-        });
+            });
         }
     }
 

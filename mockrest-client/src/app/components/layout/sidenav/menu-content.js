@@ -34,5 +34,4 @@
     menuContent.push(navtest);
     menuContent.push(home);
     menuContent.push(quiz);
-
 })();

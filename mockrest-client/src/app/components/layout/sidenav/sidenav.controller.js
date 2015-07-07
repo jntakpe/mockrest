@@ -7,33 +7,26 @@
         var vm = this;
 
         vm.menuContent = menuContent;
+        vm.toggleOpen = toggleOpen;
+        vm.isSelected = isSelected;
+        vm.isSectionSelected = isSectionSelected;
+        vm.isOpen = isOpen;
 
-        vm.isSectionSelected = function (section) {
-            var selected = false, openedSection = sidenavService.openedSection;
-            if (openedSection === section) {
-                selected = true;
-            }
-            else if (section.children) {
-                section.children.forEach(function (childSection) {
-                    if (childSection === openedSection) {
-                        selected = true;
-                    }
-                });
-            }
-            return selected;
-        };
-
-        vm.isSelected = function (page) {
+        function isSelected(page) {
             return sidenavService.isPageSelected(page);
-        };
+        }
 
-        vm.isOpen = function (section) {
+        function isOpen(section) {
             return sidenavService.isSectionSelected(section);
-        };
+        }
 
-        vm.toggleOpen = function (section) {
+        function toggleOpen(section) {
             sidenavService.toggleSelectSection(section);
-        };
+        }
+
+        function isSectionSelected(section) {
+            return sidenavService.isSectionSelected(section);
+        }
     }
 
 })();

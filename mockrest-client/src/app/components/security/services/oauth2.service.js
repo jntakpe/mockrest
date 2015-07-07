@@ -4,6 +4,7 @@
     angular.module('mockrest-security').factory('oauth2Service', oauth2Service);
 
     function oauth2Service($http, localStorageService) {
+
         return {
             login: login,
             logout: logout,

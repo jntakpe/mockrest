@@ -4,6 +4,7 @@
     angular.module('mockrest-security').factory('authService', authService);
 
     function authService($rootScope, $state, $q, principalService, oauth2Service) {
+
         return {
             login: login,
             logout: logout,
