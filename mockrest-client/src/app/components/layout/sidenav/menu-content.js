@@ -4,7 +4,7 @@
     angular.module('mockrest-layout').constant('menuContent', menuContent());
 
     function menuContent() {
-        var menuContent = [],
+        var content = [],
             navtest = {
                 name: 'HeadingTest',
                 type: 'heading',
@@ -32,9 +32,9 @@
                 state: 'main.quiz',
                 type: 'link'
             };
-        menuContent.push(navtest);
-        menuContent.push(home);
-        menuContent.push(quiz);
-        return menuContent;
+        content.push(navtest);
+        content.push(home);
+        content.push(quiz);
+        return content;
     }
 })();

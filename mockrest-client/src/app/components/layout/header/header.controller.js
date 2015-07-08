@@ -17,7 +17,6 @@
             vm.breadcrumb = headerService.breadcrumbData();
         });
 
-
         function openMenu() {
             $timeout(function () {
                 $mdSidenav('menu-left').open();

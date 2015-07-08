@@ -28,7 +28,7 @@
                 vm.user = {};
                 $mdToast.show($mdToast.simple().content('Invalid credentials').position('top'));
             });
-        }
+        };
     }
 
 })();

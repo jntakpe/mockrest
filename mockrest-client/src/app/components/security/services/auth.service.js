@@ -15,7 +15,7 @@
             var cb = callback || angular.noop, deferred = $q.defer();
             oauth2Service.login(credentials).then(function (response) {
                     principalService.resolveIdentity(true).then(function () {
-                        deferred.resolve(response)
+                        deferred.resolve(response);
                     });
                     return cb();
                 }

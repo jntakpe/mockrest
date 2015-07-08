@@ -9,13 +9,10 @@
             breadcrumbData: breadcrumbData
         };
 
-        function currentData() {
-            return $state.$current.data;
-        }
-
-        function parentsData() {
+        function parentsData(currentStateData) {
             var breadcrumb = [];
-            currentData().breadcrumb.forEach(function (stateName) {
+            currentStateData.breadcrumb = currentStateData.breadcrumb || [];
+            currentStateData.breadcrumb.forEach(function (stateName) {
                 breadcrumb.push({
                     title: $state.get(stateName).data.title,
                     name: stateName
@@ -25,11 +22,11 @@
         }
 
         function breadcrumbData() {
-            if (currentData()) {
+            if ($state.$current.data) {
                 return {
-                    title: currentData().title,
-                    parents: parentsData()
-                }
+                    title: $state.$current.data.title,
+                    parents: parentsData($state.$current.data)
+                };
             }
             return {};
         }

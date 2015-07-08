@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    describe('Controller : HomeCtrl as home => ', function () {
+    describe('Controller : NotFoundCtrl as notFound => ', function () {
 
         var scope, ctrl;
 
@@ -10,7 +10,7 @@
 
             inject(function ($controller) {
                 scope = {};
-                ctrl = $controller('HomeCtrl as home', {
+                ctrl = $controller('NotFoundCtrl as notFound', {
                     $scope: scope
                 });
             });
