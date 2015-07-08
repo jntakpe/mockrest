@@ -6,6 +6,5 @@
     function HomeCtrl() {
         var vm = this;
 
-        vm.text = 'Mais lol';
     }
 })();

@@ -6,7 +6,6 @@
             $stateProvider.state('main.home', {
                 url: '/',
                 data: {
-                    breadcrumb: ['main.home', 'main.home'],
                     title: 'Accueil'
                 },
                 views: {
