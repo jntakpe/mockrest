@@ -5,15 +5,15 @@
                 <img src="assets/images/sopra_steria.png" alt="Logo">
             </div>
 
-            <h1 id="login-title">Connexion</h1>
+            <h1 id="login-title">Sign in</h1>
 
-            <p id="login-desc">Nom d'utilisateur et mot de passe</p>
+            <p id="login-desc">No account ? <a ui-sref="register">Sign up for free</a></p>
 
             <form role="form">
                 <md-input-container class="md-icon-float">
                     <md-icon class="material-icons">perm_identity</md-icon>
                     <input id="username" name="username" ng-model="signin.user.username" placeholder="Login"
-                           type="text">
+                           type="text" focus-on="reset-signin">
                 </md-input-container>
                 <md-input-container class="md-icon-float">
                     <md-icon class="material-icons">lock</md-icon>

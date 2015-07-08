@@ -3,7 +3,7 @@
 
     angular.module('mockrest-security').controller('SignCtrl', SignCtrl);
 
-    function SignCtrl($rootScope, $state, $stateParams, toastr, authService) {
+    function SignCtrl($rootScope, $state, $stateParams, toastr, focus, authService) {
         var vm = this;
 
         vm.login = login;
@@ -29,6 +29,7 @@
             }).catch(function () {
                 vm.user = {};
                 toastr.error('Invalid credentials');
+                focus('reset-signin');
             });
         }
     }
