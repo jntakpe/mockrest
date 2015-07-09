@@ -6,7 +6,6 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -25,16 +24,14 @@ public abstract class AbstractEntity implements Serializable {
   @Version
   private Integer version;
 
-  @NotNull
   @CreatedBy
-  @Column(name = "created_by", nullable = false)
-  private String createdBy = "system";
+  @Column(name = "created_by")
+  private String createdBy;
 
-  @NotNull
   @CreatedDate
   @Temporal(TemporalType.TIMESTAMP)
-  @Column(name = "created_date", nullable = false)
-  private Date createdDate = new Date();
+  @Column(name = "created_date")
+  private Date createdDate;
 
   //FIXME to replace by Spring Security current user
   @LastModifiedBy

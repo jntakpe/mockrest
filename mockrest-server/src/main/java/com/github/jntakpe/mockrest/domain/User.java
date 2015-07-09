@@ -23,115 +23,118 @@ import java.util.Set;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class User extends AbstractEntity {
 
-  @NotNull
-  @Size(min = 1, max = 50)
-  @Pattern(regexp = "^[a-z0-9]*$")
-  @Column(length = 50, unique = true, nullable = false)
-  private String login;
+    @NotNull
+    @Size(min = 1, max = 50)
+    @Pattern(regexp = "^[a-z0-9]*$")
+    @Column(length = 50, unique = true, nullable = false)
+    private String login;
 
-  @Size(max = 50)
-  @Column(name = "first_name", length = 50)
-  private String firstName;
+    @Size(max = 50)
+    @Column(name = "first_name", length = 50)
+    private String firstName;
 
-  @Size(max = 50)
-  @Column(name = "last_name", length = 50)
-  private String lastName;
+    @Size(max = 50)
+    @Column(name = "last_name", length = 50)
+    private String lastName;
 
-  @Email
-  @Size(max = 100)
-  @Column(length = 100, unique = true)
-  private String email;
+    @Email
+    @Size(max = 100)
+    @Column(length = 100, unique = true)
+    private String email;
 
-  @Column(length = 15)
-  private String phone;
+    @Column(length = 15)
+    private String phone;
 
-  @ManyToMany
-  @JoinTable(name = "user_authority", joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-          inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "name")})
-  @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-  private Set<Authority> authorities = new HashSet<>();
+    @ManyToMany
+    @JoinTable(name = "user_authority", joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "name")})
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Authority> authorities = new HashSet<>();
 
-  @Transient
-  private String password;
+    @ManyToOne
+    private Api api;
 
-  public String getLogin() {
-    return login;
-  }
+    @Transient
+    private String password;
 
-  public void setLogin(String login) {
-    this.login = login;
-  }
+    public String getLogin() {
+        return login;
+    }
 
-  public String getFirstName() {
-    return firstName;
-  }
+    public void setLogin(String login) {
+        this.login = login;
+    }
 
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
+    public String getFirstName() {
+        return firstName;
+    }
 
-  public String getLastName() {
-    return lastName;
-  }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
-  }
+    public String getLastName() {
+        return lastName;
+    }
 
-  public String getEmail() {
-    return email;
-  }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-  public void setEmail(String email) {
-    this.email = email;
-  }
+    public String getEmail() {
+        return email;
+    }
 
-  public String getPhone() {
-    return phone;
-  }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-  public void setPhone(String phone) {
-    this.phone = phone;
-  }
+    public String getPhone() {
+        return phone;
+    }
 
-  public Set<Authority> getAuthorities() {
-    return authorities;
-  }
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-  public void setAuthorities(Set<Authority> authorities) {
-    this.authorities = authorities;
-  }
+    public Set<Authority> getAuthorities() {
+        return authorities;
+    }
 
-  public String getPassword() {
-    return password;
-  }
+    public void setAuthorities(Set<Authority> authorities) {
+        this.authorities = authorities;
+    }
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
+    public String getPassword() {
+        return password;
+    }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    User user = (User) o;
-    return Objects.equals(login, user.login);
-  }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(login);
-  }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(login, user.login);
+    }
 
-  @Override
-  public String toString() {
-    return new ToStringBuilder(this)
-            .append("login", login)
-            .append("firstName", firstName)
-            .append("lastName", lastName)
-            .append("email", email)
-            .append("phone", phone)
-            .append("authorities", authorities)
-            .toString();
-  }
+    @Override
+    public int hashCode() {
+        return Objects.hash(login);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("login", login)
+                .append("firstName", firstName)
+                .append("lastName", lastName)
+                .append("email", email)
+                .append("phone", phone)
+                .append("authorities", authorities)
+                .toString();
+    }
 }

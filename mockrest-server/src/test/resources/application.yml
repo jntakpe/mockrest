@@ -1,0 +1,39 @@
+app:
+  name: ${project.name}
+  description: ${project.description}
+  version: ${project.version}
+  termsOfServiceUrl: http://www.github.com/jntakpe/mockrest
+  contact: j.ntakpe@gmail.com
+  license: MIT
+  licenseUrl: http://opensource.org/licenses/MIT
+management:
+  context-path: /manage
+  security:
+    enabled: false
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL82Dialect
+    database: postgresql
+    openInView: false
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate.cache.use_second_level_cache: true
+      hibernate.cache.use_query_cache: false
+      hibernate.generate_statistics: true
+      hibernate.format_sql: true
+      hibernate.cache.region.factory_class: org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+authentication:
+    oauth:
+        clientId: mockrestserver
+        secret: mockrestsupersecret
+        tokenValidityInSeconds: 1800
+datasource:
+  url: jdbc:postgresql://localhost:5432/mockrest-test
+  username: postgres
+  password: sopra*
+  dataSourceClassName: org.postgresql.ds.PGSimpleDataSource
+liquibase:
+  enabled: false
