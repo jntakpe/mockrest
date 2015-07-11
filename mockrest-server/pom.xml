@@ -19,6 +19,7 @@
     </parent>
 
     <properties>
+        <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -220,6 +221,11 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>${testng.version}</version>
@@ -277,10 +283,10 @@
                 <version>${liquibase.version}</version>
                 <configuration>
                     <changeLogFile>src/main/resources/liquibase/master.xml</changeLogFile>
-                    <diffChangeLogFile>src/main/resources/liquibase/changelog/yyyyMMddHHmmss_changelog.xml
+                    <diffChangeLogFile>src/main/resources/liquibase/changelog/${maven.build.timestamp}_changelog.xml
                     </diffChangeLogFile>
                     <driver>org.postgresql.Driver</driver>
-                    <url>jdbc:postgresql://localhost:5432/ezquiz</url>
+                    <url>jdbc:postgresql://localhost:5432/mockrest</url>
                     <username>postgres</username>
                     <password>sopra*</password>
                     <referenceUrl>

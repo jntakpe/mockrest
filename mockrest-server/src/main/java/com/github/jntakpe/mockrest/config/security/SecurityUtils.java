@@ -1,10 +1,11 @@
 package com.github.jntakpe.mockrest.config.security;
 
 import com.github.jntakpe.mockrest.config.ConfigConstants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -16,73 +17,44 @@ import java.util.Optional;
  */
 public final class SecurityUtils {
 
-  private SecurityUtils() {
-  }
+    private static final Logger LOGGER = LoggerFactory.getLogger(SecurityUtils.class);
 
-  /**
-   * Récupère l'id de l'utilisateur Spring Security courant
-   *
-   * @return l'id d'utilisateur courant
-   */
-  public static Optional<Long> getCurrentId() {
-    Authentication authentication = getAuthentification();
-    SpringSecurityUser springSecurityUser;
-    if (authentication != null && authentication.getPrincipal() instanceof SpringSecurityUser) {
-      springSecurityUser = (SpringSecurityUser) authentication.getPrincipal();
-      return Optional.of(springSecurityUser.getId());
-    }
-    return Optional.empty();
+    private SecurityUtils() {
     }
 
-  /**
-   * Récupère le login de l'utilisateur Spring Security courant
-   *
-   * @return le nom d'utilisateur courant
-   */
-  public static Optional<String> getCurrentLogin() {
-    Authentication authentication = getAuthentification();
-    String userName = null;
-    if (authentication != null) {
-      if (authentication.getPrincipal() instanceof UserDetails) {
-        userName = ((UserDetails) authentication.getPrincipal()).getUsername();
-      } else if (authentication.getPrincipal() instanceof String) {
-        userName = (String) authentication.getPrincipal();
-      }
-    }
-    return Optional.ofNullable(userName);
-    }
-
-  /**
-   * Récupère l'utilisateur courant
-   *
-   * @return l'utilisateur courant
-   */
-  public static Optional<UserDetails> getCurrentUser() {
-    Authentication authentication = getAuthentification();
-    if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
-      return Optional.of((UserDetails) authentication.getPrincipal());
-    }
-    return Optional.empty();
-    }
-
-  /**
-   * Vérifie si l'utilisateur est authentifié
-   *
-   * @return {@code true} si l'utilisateur est authentifié sinon {@code false}
-   */
-  public static boolean isAuthenticated() {
-    Collection<? extends GrantedAuthority> authorities = getAuthentification().getAuthorities();
-    if (authorities != null) {
-      for (GrantedAuthority authority : authorities) {
-        if (authority.getAuthority().equals(ConfigConstants.ANONYMOUS)) {
-          return false;
+    /**
+     * Récupère l'utilisateur Spring Security courant
+     *
+     * @return l'utilisateur courant
+     */
+    public static Optional<SpringSecurityUser> getCurrentUser() {
+        Authentication authentication = getAuthentification();
+        SpringSecurityUser springSecurityUser;
+        if (authentication != null && authentication.getPrincipal() instanceof SpringSecurityUser) {
+            springSecurityUser = (SpringSecurityUser) authentication.getPrincipal();
+            return Optional.of(springSecurityUser);
         }
-      }
-        }
-    return true;
+        return Optional.empty();
     }
 
-  private static Authentication getAuthentification() {
-    return SecurityContextHolder.getContext().getAuthentication();
-  }
+    /**
+     * Vérifie si l'utilisateur est authentifié
+     *
+     * @return {@code true} si l'utilisateur est authentifié sinon {@code false}
+     */
+    public static boolean isAuthenticated() {
+        Collection<? extends GrantedAuthority> authorities = getAuthentification().getAuthorities();
+        if (authorities != null) {
+            for (GrantedAuthority authority : authorities) {
+                if (authority.getAuthority().equals(ConfigConstants.ANONYMOUS)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private static Authentication getAuthentification() {
+        return SecurityContextHolder.getContext().getAuthentication();
+    }
 }

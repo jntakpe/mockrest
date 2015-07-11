@@ -16,4 +16,5 @@ public interface UserRepository extends GenericRepository<User> {
 
     Optional<User> findByEmail(String email);
 
+    Long countByTemporary(boolean temporary);
 }

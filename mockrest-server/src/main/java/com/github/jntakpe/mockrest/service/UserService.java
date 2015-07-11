@@ -1,5 +1,7 @@
 package com.github.jntakpe.mockrest.service;
 
+import com.github.jntakpe.mockrest.config.security.SecurityUtils;
+import com.github.jntakpe.mockrest.config.security.SpringSecurityUser;
 import com.github.jntakpe.mockrest.domain.User;
 import com.github.jntakpe.mockrest.repository.UserRepository;
 import org.hibernate.Hibernate;
@@ -53,7 +55,50 @@ public class UserService {
      */
     @Transactional(readOnly = true)
     public Optional<User> findByLogin(String login) {
-        LOGGER.trace("Searching user with username {} from DB", login);
+        LOGGER.debug("Searching user with username {} from DB", login);
         return userRepository.findByLoginIgnoreCase(login);
+    }
+
+    /**
+     * Récupère un utilisateur à partir de son identifiant
+     *
+     * @param id identifiant de l'utilisateur
+     * @return utilisateur correspondant à l'identifiant
+     */
+    @Transactional(readOnly = true)
+    public User findById(Long id) {
+        LOGGER.debug("Searching user with id {}");
+        return userRepository.findOne(id);
+    }
+
+    /**
+     * Créé un utilisateur temporaire
+     *
+     * @return utilisateur temporaire créé
+     */
+    @Transactional
+    public User createTemporary() {
+        User tmpUser = User.createTmp(findTmpUserName());
+        LOGGER.info("Creating temporary user {}", tmpUser);
+        return userRepository.save(tmpUser);
+    }
+
+    /**
+     * Récupère l'utilisateur courant s'il existe sinon créé un utilisateur temporaire
+     *
+     * @return l'utilisateur courant ou celui créé temporairement
+     */
+    @Transactional
+    public User getCurrentUserOrCreateTemp() {
+        return SecurityUtils.getCurrentUser()
+                .map(SpringSecurityUser::getId)
+                .map(this::findById)
+                .orElseGet(this::createTemporary);
+    }
+
+    private String findTmpUserName() {
+        Long nbTemporary = userRepository.countByTemporary(true);
+        LOGGER.trace("Counting {} temporary users", nbTemporary);
+        return User.TMP_PREFIX + ++nbTemporary;
     }
 }

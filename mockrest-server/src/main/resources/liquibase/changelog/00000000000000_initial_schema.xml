@@ -26,6 +26,9 @@
                 <constraints unique="true"/>
             </column>
             <column name="phone" type="varchar(15)"/>
+            <column name="temporary" type="boolean">
+                <constraints nullable="false"/>
+            </column>
             <column name="created_by" type="varchar(50)">
                 <constraints nullable="false"/>
             </column>

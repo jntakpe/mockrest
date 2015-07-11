@@ -19,9 +19,11 @@ import java.util.Set;
  * @author jntakpe
  */
 @Entity
-@Table(name = "api_user")
+@Table(name = "t_user")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class User extends AbstractEntity {
+
+    public static final String TMP_PREFIX = "tmp";
 
     @NotNull
     @Size(min = 1, max = 50)
@@ -45,17 +47,28 @@ public class User extends AbstractEntity {
     @Column(length = 15)
     private String phone;
 
+    @Column(nullable = false)
+    private boolean temporary;
+
     @ManyToMany
     @JoinTable(name = "user_authority", joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "name")})
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Authority> authorities = new HashSet<>();
 
-    @ManyToOne
-    private Api api;
+    @OneToMany(mappedBy = "api")
+    private Set<UserApi> userApis = new HashSet<>();
 
     @Transient
     private String password;
+
+    public static User createTmp(String login) {
+        User tmpUser = new User();
+        tmpUser.setLogin(login);
+        tmpUser.setEmail(login + "@test.com");
+        tmpUser.setTemporary(true);
+        return tmpUser;
+    }
 
     public String getLogin() {
         return login;
@@ -97,12 +110,28 @@ public class User extends AbstractEntity {
         this.phone = phone;
     }
 
+    public boolean isTemporary() {
+        return temporary;
+    }
+
+    public void setTemporary(boolean temporary) {
+        this.temporary = temporary;
+    }
+
     public Set<Authority> getAuthorities() {
         return authorities;
     }
 
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
+    }
+
+    public Set<UserApi> getUserApis() {
+        return userApis;
+    }
+
+    public void setUserApis(Set<UserApi> userApis) {
+        this.userApis = userApis;
     }
 
     public String getPassword() {

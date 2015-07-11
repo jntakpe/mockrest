@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="jOSS (generated)" id="1436471593411-1">
+        <createTable tableName="UserApi">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="UserApiPK"/>
+            </column>
+            <column name="created_by" type="VARCHAR(255)"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="last_modified_by" type="VARCHAR(255)"/>
+            <column name="last_modified_date" type="timestamp"/>
+            <column name="version" type="INT"/>
+            <column name="api_id" type="BIGINT"/>
+            <column name="authority_name" type="VARCHAR(50)"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="jOSS (generated)" id="1436471593411-2">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="UserApi"
+                                 constraintName="FK_k3d29d18o5dd1dnrqkfgecrra" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id" referencedTableName="t_user"/>
+    </changeSet>
+    <changeSet author="jOSS (generated)" id="1436471593411-3">
+        <addForeignKeyConstraint baseColumnNames="api_id" baseTableName="UserApi"
+                                 constraintName="FK_np12pjfiq4fna8cgvga0vd55t" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Api"/>
+    </changeSet>
+    <changeSet author="jOSS (generated)" id="1436471593411-4">
+        <addForeignKeyConstraint baseColumnNames="authority_name" baseTableName="UserApi"
+                                 constraintName="FK_sipesgn7jhkkq9h9bkjjapivx" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="name"
+                                 referencedTableName="Authority"/>
+    </changeSet>
+    <changeSet author="jOSS (generated)" id="1436471593411-5">
+        <dropForeignKeyConstraint baseTableName="user_api" constraintName="fk_9igk54g9kcoyx56anftnea6ov"/>
+    </changeSet>
+    <changeSet author="jOSS (generated)" id="1436471593411-6">
+        <dropForeignKeyConstraint baseTableName="user_api" constraintName="fk_gmk98y0oiiv1t08frao4r3cjw"/>
+    </changeSet>
+    <changeSet author="jOSS (generated)" id="1436471593411-7">
+        <dropForeignKeyConstraint baseTableName="user_api" constraintName="fk_ngeayqtwqkgs09xb2s7pb0iyv"/>
+    </changeSet>
+    <changeSet author="jOSS (generated)" id="1436471593411-8">
+        <dropSequence sequenceName="api_id_seq"/>
+    </changeSet>
+    <changeSet author="jOSS (generated)" id="1436471593411-9">
+        <dropSequence sequenceName="t_user_id_seq"/>
+    </changeSet>
+    <changeSet author="jOSS (generated)" id="1436471593411-10">
+        <dropSequence sequenceName="user_api_id_seq"/>
+    </changeSet>
+    <changeSet author="jOSS (generated)" id="1436471593411-11">
+        <dropTable tableName="user_api"/>
+    </changeSet>
+</databaseChangeLog>
