@@ -24,7 +24,7 @@ public class Api extends AbstractEntity {
     private String name;
 
     @Enumerated(EnumType.STRING)
-    private Visibility visibility;
+    private Visibility visibility = Visibility.PUBLIC;
 
     @OneToMany(mappedBy = "api")
     private Set<UserApi> userApis = new HashSet<>();

@@ -41,6 +41,7 @@ public abstract class AbstractServiceTestContext extends AbstractTestNGSpringCon
     @BeforeClass
     public void setUp() {
         jdbcTemplate = new JdbcTemplate(dataSource);
+        before();
     }
 
     @BeforeMethod

@@ -36,7 +36,7 @@ public class ApiService {
      */
     @Transactional
     public Api create(Api api) {
-        LOGGER.info("Creating api {}");
+        LOGGER.info("Creating api {}", api);
         Api savedApi = apiRepository.save(api);
         userApiService.create(savedApi);
         return savedApi;

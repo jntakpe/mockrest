@@ -9,5 +9,4 @@ import com.github.jntakpe.mockrest.domain.Api;
  */
 public interface ApiRepository extends GenericRepository<Api> {
 
-
 }

@@ -14,6 +14,7 @@ import java.util.Optional;
 
 import static com.github.jntakpe.mockrest.domain.Authority.ROLE_ADMIN;
 import static com.github.jntakpe.mockrest.domain.Authority.ROLE_USER;
+import static com.github.jntakpe.mockrest.service.UserApiServiceTest.USER_API_TABLE;
 import static com.ninja_squad.dbsetup.Operations.sql;
 import static com.ninja_squad.dbsetup.operation.CompositeOperation.sequenceOf;
 import static org.assertj.core.api.StrictAssertions.assertThat;
@@ -36,12 +37,16 @@ public class UserServiceTest extends AbstractServiceTestContext {
 
     public static final String CLASSIC_USER = "classicuser";
 
+    public static final String SECURITY_USER = "securityuser";
+
+    public static final Long SECURITY_USER_ID = 99999L;
+
     @Autowired
     private UserService userService;
 
     public static Operation userOperations() {
         return sequenceOf(
-                Operations.deleteAllFrom(USER_AUTHORITY_TABLE, USER_TABLE, AUTHORITY_TABLE),
+                Operations.deleteAllFrom(USER_API_TABLE, USER_AUTHORITY_TABLE, USER_TABLE, AUTHORITY_TABLE),
                 Operations
                         .insertInto(AUTHORITY_TABLE)
                         .columns("name")
@@ -52,6 +57,10 @@ public class UserServiceTest extends AbstractServiceTestContext {
                         .columns("login", "first_name", "last_name", "email", "phone", "temporary")
                         .values(ADMIN_USER, "admin", "admin", "admin@gmail.com", "000000000000", false)
                         .values(CLASSIC_USER, "classic", "classic", "classic@gmail.com", "000000000000", false)
+                        .build(),
+                Operations.insertInto(USER_TABLE)
+                        .columns("id", "login", "first_name", "last_name", "email", "phone", "temporary")
+                        .values(SECURITY_USER_ID, SECURITY_USER, "security", "security", "security@gmail.com", "000000000000", false)
                         .build(),
                 sql(buildInsertRequest(ADMIN_USER, ROLE_USER)),
                 sql(buildInsertRequest(ADMIN_USER, ROLE_ADMIN)),
