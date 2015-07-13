@@ -1,15 +1,15 @@
 package com.github.jntakpe.mockrest.service;
 
 import com.github.jntakpe.mockrest.domain.Api;
+import com.github.jntakpe.mockrest.repository.ApiRepository;
+import com.github.jntakpe.mockrest.repository.UserApiRepository;
 import com.ninja_squad.dbsetup.Operations;
 import com.ninja_squad.dbsetup.operation.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.testng.annotations.Test;
 
-import static com.github.jntakpe.mockrest.service.UserApiServiceTest.USER_API_TABLE;
 import static com.github.jntakpe.mockrest.service.UserServiceTest.SECURITY_USER;
-import static com.github.jntakpe.mockrest.service.UserServiceTest.userOperations;
 import static com.ninja_squad.dbsetup.operation.CompositeOperation.sequenceOf;
 import static org.assertj.core.api.StrictAssertions.assertThat;
 
@@ -18,7 +18,6 @@ import static org.assertj.core.api.StrictAssertions.assertThat;
  *
  * @author jntakpe
  */
-
 public class ApiServiceTest extends AbstractServiceTestContext {
 
     //FIXME use super class to bootstrap tests
@@ -32,12 +31,17 @@ public class ApiServiceTest extends AbstractServiceTestContext {
     public static final String GMAP_API = "gmap_api";
 
     @Autowired
+    private ApiRepository apiRepository;
+
+    @Autowired
     private ApiService apiService;
+
+    @Autowired
+    private UserApiRepository userApiRepository;
 
     public static Operation apiOperations() {
         return sequenceOf(
-                Operations.deleteAllFrom(USER_API_TABLE, API_TABLE),
-                userOperations(),
+                Operations.deleteAllFrom(API_TABLE),
                 Operations
                         .insertInto(API_TABLE)
                         .columns("name")
@@ -55,17 +59,30 @@ public class ApiServiceTest extends AbstractServiceTestContext {
 
     @Override
     protected Operation operations() {
-        return apiOperations();
+        return UserApiServiceTest.userApiOperations();
     }
 
     @Test
     @WithUserDetails(SECURITY_USER)
-    public void createTest_shouldCreate() throws Exception {
+    public void createTest_shouldCreate() {
         Api api = new Api();
         api.setName("newAPI");
         Api saved = apiService.create(api);
-        assertThat(initCount + 1).isEqualTo(count());
+        assertThat(countRowsInTable(getTable())).isEqualTo(++initCount);
         assertThat(saved).isNotNull();
+    }
+
+    @Test
+    public void removeTest_shouldRemove() {
+        Long githubApiId = getIdWithName(GITHUB_API);
+        Long userApiId = apiRepository.findOne(githubApiId).getUserApis().stream().findAny().get().getId();
+        apiService.delete(githubApiId);
+        assertThat(apiRepository.findOne(githubApiId)).isNull();
+        assertThat(userApiRepository.findOne(userApiId)).isNull();
+    }
+
+    private Long getIdWithName(String name) {
+        return jdbcTemplate.queryForObject("select id from " + API_TABLE + " where name='" + name + "'", Long.class);
     }
 
 }

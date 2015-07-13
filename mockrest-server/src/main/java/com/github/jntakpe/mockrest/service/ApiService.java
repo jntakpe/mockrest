@@ -42,5 +42,17 @@ public class ApiService {
         return savedApi;
     }
 
+    /**
+     * Suppression d'une API
+     *
+     * @param id identifiant de l'api à supprimer
+     */
+    @Transactional
+    public void delete(Long id) {
+        Api toDelete = apiRepository.findOne(id);
+        LOGGER.info("Removing API {}", toDelete);
+        userApiService.remove(toDelete.getUserApis());
+        apiRepository.delete(toDelete);
+    }
 
 }

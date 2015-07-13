@@ -13,5 +13,4 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(UrlConstants.USER_API)
 public class ApiResource {
 
-
 }

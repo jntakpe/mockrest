@@ -72,13 +72,10 @@ public class UserApiServiceTest extends AbstractServiceTestContext {
     }
 
     private void testContent() {
-        Api api = new Api();
-        String testApiName = "testApiName";
-        api.setName(testApiName);
+        Api api = apiRepository.findOne(findApiIdByName(GMAP_API));
         Api save = apiRepository.save(api);
         UserApi userApi = userApiService.create(save);
-        assertThat(initCount + 1).isEqualTo(count());
-        assertThat(findApiIdByName(testApiName)).isNotNull();
+        assertThat(initCount + 1).isEqualTo(countRowsInTable(getTable()));
         assertThat(userApi.getUser()).isNotNull();
         assertThat(userApi.getApi()).isNotNull();
         assertThat(userApi.getAuthority()).isNotNull();

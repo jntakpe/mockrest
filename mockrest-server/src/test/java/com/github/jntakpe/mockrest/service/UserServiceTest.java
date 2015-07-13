@@ -129,7 +129,7 @@ public class UserServiceTest extends AbstractServiceTestContext {
     @Test
     public void createTemporary_shouldCreate() {
         User temporary = userService.createTemporary();
-        assertThat(count()).isEqualTo(initCount + 1);
+        assertThat(countRowsInTable(getTable())).isEqualTo(initCount + 1);
         assertThat(jdbcTemplate.queryForObject("select count(*) from t_user where login = ?", Long.class, temporary.getLogin())).isNotZero();
     }
 
