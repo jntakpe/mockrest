@@ -54,21 +54,9 @@ public class UserApiService {
     }
 
     /**
-     * Recherche un lien {@link UserApi} en fonction d'une API
-     *
-     * @param api api à rechercher
-     * @return userApi correspondant à l'api
-     */
-    @Transactional(readOnly = true)
-    public UserApi findByApi(Api api) {
-        LOGGER.debug("Searching userApi with api {}", api);
-        return userApiRepository.findByApi(api);
-    }
-
-    /**
      * Suppression des liens {@link UserApi}
      *
-     * @param userApi les liens a supprimer
+     * @param userApis les liens a supprimer
      */
     @Transactional
     public void remove(Set<UserApi> userApis) {

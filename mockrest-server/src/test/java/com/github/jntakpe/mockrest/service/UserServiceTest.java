@@ -54,13 +54,13 @@ public class UserServiceTest extends AbstractServiceTestContext {
                         .values(ROLE_ADMIN)
                         .build(),
                 Operations.insertInto(USER_TABLE)
-                        .columns("login", "first_name", "last_name", "email", "phone", "temporary")
-                        .values(ADMIN_USER, "admin", "admin", "admin@gmail.com", "000000000000", false)
-                        .values(CLASSIC_USER, "classic", "classic", "classic@gmail.com", "000000000000", false)
+                        .columns("version", "login", "first_name", "last_name", "email", "phone", "temporary")
+                        .values(0, ADMIN_USER, "admin", "admin", "admin@gmail.com", "000000000000", false)
+                        .values(0, CLASSIC_USER, "classic", "classic", "classic@gmail.com", "000000000000", false)
                         .build(),
                 Operations.insertInto(USER_TABLE)
-                        .columns("id", "login", "first_name", "last_name", "email", "phone", "temporary")
-                        .values(SECURITY_USER_ID, SECURITY_USER, "security", "security", "security@gmail.com", "000000000000", false)
+                        .columns("id", "version", "login", "first_name", "last_name", "email", "phone", "temporary")
+                        .values(SECURITY_USER_ID, 0, SECURITY_USER, "security", "security", "security@gmail.com", "000000000000", false)
                         .build(),
                 sql(buildInsertRequest(ADMIN_USER, ROLE_USER)),
                 sql(buildInsertRequest(ADMIN_USER, ROLE_ADMIN)),

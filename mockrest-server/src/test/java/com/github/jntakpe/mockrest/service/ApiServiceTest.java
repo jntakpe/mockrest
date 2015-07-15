@@ -44,10 +44,10 @@ public class ApiServiceTest extends AbstractServiceTestContext {
                 Operations.deleteAllFrom(API_TABLE),
                 Operations
                         .insertInto(API_TABLE)
-                        .columns("name")
-                        .values(TWITTER_API)
-                        .values(GITHUB_API)
-                        .values(GMAP_API)
+                        .columns("version", "name", "visibility")
+                        .values(0, TWITTER_API, Api.Visibility.PUBLIC)
+                        .values(0, GITHUB_API, Api.Visibility.PUBLIC)
+                        .values(0, GMAP_API, Api.Visibility.PUBLIC)
                         .build()
         );
     }
@@ -75,10 +75,10 @@ public class ApiServiceTest extends AbstractServiceTestContext {
     @Test
     public void removeTest_shouldRemove() {
         Long githubApiId = getIdWithName(GITHUB_API);
-        Long userApiId = apiRepository.findOne(githubApiId).getUserApis().stream().findAny().get().getId();
         apiService.delete(githubApiId);
+        apiRepository.flush();
         assertThat(apiRepository.findOne(githubApiId)).isNull();
-        assertThat(userApiRepository.findOne(userApiId)).isNull();
+        assertThat(countRowsInTable(API_TABLE)).isEqualTo(--initCount);
     }
 
     private Long getIdWithName(String name) {

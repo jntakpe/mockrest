@@ -11,5 +11,5 @@ public class UrlConstants {
 
     public static final String ACCOUNT = BASE + "/account";
 
-    public static final String USER_API = BASE + "/user/{userId}/api";
+    public static final String API = BASE + "/api";
 }

@@ -73,7 +73,7 @@ public class Api extends AbstractEntity {
                 .toString();
     }
 
-    enum Visibility {
+    public enum Visibility {
         PUBLIC, READ_ONLY, PRIVATE
     }
 }

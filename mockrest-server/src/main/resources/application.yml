@@ -16,7 +16,7 @@ spring:
     show-sql: true
     generate-ddl: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: validate
     properties:
       hibernate.cache.use_second_level_cache: true
       hibernate.cache.use_query_cache: false

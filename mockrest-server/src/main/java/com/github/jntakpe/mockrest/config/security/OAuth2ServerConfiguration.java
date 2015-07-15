@@ -58,7 +58,6 @@ public class OAuth2ServerConfiguration {
                     .frameOptions().disable()
                     .and()
                     .authorizeRequests()
-                    .antMatchers("/api/**").authenticated()
                     .antMatchers("/manage/**").hasAnyAuthority(ConfigConstants.ADMIN);
         }
     }

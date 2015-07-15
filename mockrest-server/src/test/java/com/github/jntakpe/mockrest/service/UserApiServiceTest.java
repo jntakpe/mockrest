@@ -44,8 +44,9 @@ public class UserApiServiceTest extends AbstractServiceTestContext {
     }
 
     private static String buildInsertRequest(String username, String authority, String apiname) {
-        return "insert into " + USER_API_TABLE + " (user_id, authority_name, api_id) " +
-                "VALUES ((select id from " + USER_TABLE + " where login = '" + username + "')," +
+        return "insert into " + USER_API_TABLE + " (version, user_id, authority_name, api_id) " +
+                "VALUES (0, " +
+                "(select id from " + USER_TABLE + " where login = '" + username + "')," +
                 "'" + authority + "'," +
                 "(select id from " + API_TABLE + " where name = '" + apiname + "'))";
     }

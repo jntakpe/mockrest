@@ -56,7 +56,7 @@ public class User extends AbstractEntity {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Authority> authorities = new HashSet<>();
 
-    @OneToMany(mappedBy = "api")
+    @OneToMany(mappedBy = "user")
     private Set<UserApi> userApis = new HashSet<>();
 
     @Transient

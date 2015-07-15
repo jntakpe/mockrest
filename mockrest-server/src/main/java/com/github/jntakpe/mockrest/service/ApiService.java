@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 /**
  * Services associés à l'entité {@link com.github.jntakpe.mockrest.domain.Api}
  *
@@ -55,4 +57,15 @@ public class ApiService {
         apiRepository.delete(toDelete);
     }
 
+    /**
+     * Recherche une api en fonction de son nom
+     *
+     * @param name nom de l'API recherché
+     * @return l'API correspondant au nom
+     */
+    @Transactional(readOnly = true)
+    public Optional<Api> findByName(String name) {
+        LOGGER.debug("Searching Api by name {}", name);
+        return apiRepository.findByName(name);
+    }
 }
